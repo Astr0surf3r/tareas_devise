@@ -1,2 +1,31 @@
 <h1>Paginas#bienvenido</h1>
 <p>Find me in app/views/paginas/bienvenido.html.erb</p>
+
+
+<% if usuario_signed_in? %>
+
+Lista Tareas
+<ul>
+
+<% @tareas.each do |t| %>
+
+<li> <%= t.contenido %> </li>
+
+<% end %>
+
+</ul>
+<%= form_for (@tarea) do |a| %>
+
+<%= a.label :contenido %>
+<%= a.text_field :contenido %>
+<%= a.hidden_field :usuario_id, :value => current_usuario.id %>
+
+<%= a.submit 'Crea Tarea' %>
+
+<% end %>
+
+<% else %>
+
+BIENVENIDO
+
+<% end %>
